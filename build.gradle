@@ -156,4 +156,5 @@ tasks.withType(JavaCompile).configureEach {
 
 buildConfig{
     buildConfigField("String","MOD_ID","\"${mod_id}\"")
+    buildConfigField("String","MOD_NAME","\"${mod_name}\"")
 }
