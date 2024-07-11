@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.ref_name }}
 
     - name: Set up Git
       run: |
@@ -20,17 +22,23 @@ jobs:
 
     - name: Create empty commit
       run: |
-        git checkout ${{ github.ref }}
+        git checkout ${{ github.ref_name }}
         git commit --allow-empty -m "Empty commit triggered by creation of feature branch"
-        git push origin ${{ github.ref }}
+        git push origin ${{ github.ref_name }}
 
     - name: Install GitHub CLI
       run: |
-        curl -sSL https://cli.github.com/install.sh | sh
+        sudo apt-get update
+        sudo apt-get install -y gh
 
-    - name: Create Pull Request
+    - name: Authenticate with GitHub CLI
+      run: |
+        echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create Pull Request
       run: |
-        gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
         gh pr create --base develop --head ${{ github.ref_name }} --title "PR for feature branch: ${{ github.ref_name }}" --body "This is an automatically generated PR for the feature branch: ${{ github.ref_name }}."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
