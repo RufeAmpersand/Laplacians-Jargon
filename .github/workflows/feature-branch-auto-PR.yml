@@ -26,11 +26,12 @@ jobs:
 
     - name: Install GitHub CLI
       run: |
-        curl -sSL https://cli.github.com/install.sh | sh
+        sudo apt-get update
+        sudo apt-get install -y gh
 
     - name: Create Pull Request
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+        echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
         gh pr create --base develop --head ${{ github.ref_name }} --title "PR for feature branch: ${{ github.ref_name }}" --body "This is an automatically generated PR for the feature branch: ${{ github.ref_name }}."
