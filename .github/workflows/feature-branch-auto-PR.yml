@@ -29,9 +29,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y gh
 
-    - name: Create Pull Request
+    - name: Authenticate with GitHub CLI
+      run: |
+        gh auth status
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create Pull Request
       run: |
-        echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
         gh pr create --base develop --head ${{ github.ref_name }} --title "PR for feature branch: ${{ github.ref_name }}" --body "This is an automatically generated PR for the feature branch: ${{ github.ref_name }}."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
