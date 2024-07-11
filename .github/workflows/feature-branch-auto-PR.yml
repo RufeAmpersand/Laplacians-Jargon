@@ -1,0 +1,36 @@
+name: Feature Branch Workflow
+
+on:
+  create:
+    branches:
+      - 'feature/**'
+
+jobs:
+  create-empty-commit-and-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Create empty commit
+      run: |
+        git checkout ${{ github.ref }}
+        git commit --allow-empty -m "Empty commit triggered by creation of feature branch"
+        git push origin ${{ github.ref }}
+
+    - name: Install GitHub CLI
+      run: |
+        curl -sSL https://cli.github.com/install.sh | sh
+
+    - name: Create Pull Request
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+        gh pr create --base develop --head ${{ github.ref_name }} --title "PR for feature branch: ${{ github.ref_name }}" --body "This is an automatically generated PR for the feature branch: ${{ github.ref_name }}."
