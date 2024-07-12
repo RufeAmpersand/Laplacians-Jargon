@@ -1,4 +1,4 @@
-package io.github.rufe.laplacians_jargon.creative_tab
+package rufe.laplacians_jargon.creative_tab
 
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
@@ -6,12 +6,11 @@ import net.minecraft.world.item.CreativeModeTab
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.RegistryObject
-import io.github.rufe.laplacians_jargon.Laplacians_Jargon.BuildConfig
-import io.github.rufe.laplacians_jargon.register.ItemRegister
+import rufe.laplacians_jargon.Laplacians_Jargon.BuildConfig
+import rufe.laplacians_jargon.register.ItemRegister
 
 object LaplaciansJargonCreativeTab {
-    val creativeModTabs: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB,
-        BuildConfig.MOD_ID)
+    val creativeModTabs: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB,BuildConfig.MOD_ID)
     val creativeModTabId : String = "item_group." + BuildConfig.MOD_ID + ".general"
     val creativeModTab: RegistryObject<CreativeModeTab> = creativeModTabs.register(creativeModTabId){
         CreativeModeTab.builder().title(Component.translatable(creativeModTabId)).icon{

@@ -1,18 +1,18 @@
-package io.github.rufe.laplacians_jargon.register
+package rufe.laplacians_jargon.register
 
 import net.minecraft.world.item.Item
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
 import net.minecraftforge.registries.RegistryObject
-import io.github.rufe.laplacians_jargon.Laplacians_Jargon.BuildConfig
-import io.github.rufe.laplacians_jargon.consts.idPageOfWisdom
-import io.github.rufe.laplacians_jargon.item.ItemPageOfWisdom
+import rufe.laplacians_jargon.Laplacians_Jargon.BuildConfig
+import rufe.laplacians_jargon.consts.idPageOfWisdom
+import rufe.laplacians_jargon.item.ItemPageOfWisdom
 import java.util.function.Supplier
 
 @Suppress("unused")
 object ItemRegister {
-    private val ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, BuildConfig.MOD_ID)
+    private val ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS,BuildConfig.MOD_ID)
     val ITEM_MAP: HashMap<String, RegistryObject<Item>> = LinkedHashMap()
 
     val pageOfWisdom: RegistryObject<Item> = registering(idPageOfWisdom){
