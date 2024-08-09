@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "laplacians_jargon:item/enchanted_page"
+  }
+}
