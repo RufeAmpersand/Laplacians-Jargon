@@ -14,8 +14,8 @@ import java.util.function.Consumer
 
 class LJRecipeProvider(packOutput: PackOutput) : RecipeProvider(packOutput) {
     override fun buildRecipes(consumer: Consumer<FinishedRecipe>) {
-        shapeless(ItemRegister.enchantedPage).requires(Items.ENCHANTED_BOOK).requires(Items.SHEARS).save(consumer)
-        shapeless(ItemRegister.pageOfWisdom).requires(ItemRegister.enchantedPage).requires(Items.GLOW_INK_SAC).requires(Items.GOLD_NUGGET).save(consumer)
+        shapeless(ItemRegister.enchantedPage.get()).requires(Items.ENCHANTED_BOOK).requires(Items.SHEARS).save(consumer)
+        shapeless(ItemRegister.pageOfWisdom.get()).requires(ItemRegister.enchantedPage.get()).requires(Items.GLOW_INK_SAC).requires(Items.GOLD_NUGGET).save(consumer)
     }
 
     fun shaped(result: ItemLike): ShapedRecipeBuilder {
