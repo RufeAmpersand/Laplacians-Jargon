@@ -5,18 +5,19 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.RegistryObject
 import rufe.laplacians_jargon.Laplacians_Jargon.BuildConfig
+import rufe.laplacians_jargon.register.AbstractRegister
 import rufe.laplacians_jargon.register.ItemRegister
+import thedarkcolour.kotlinforforge.forge.ObjectHolderDelegate
 
-object LaplaciansJargonCreativeTab {
+object CreativeTabRegister: AbstractRegister<CreativeModeTab> {
     val creativeModTabs: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB,BuildConfig.MOD_ID)
     val creativeModTabId : String = "item_group." + BuildConfig.MOD_ID + ".general"
-    val creativeModTab: RegistryObject<CreativeModeTab> = creativeModTabs.register(creativeModTabId){
+    val creativeModTab: ObjectHolderDelegate<CreativeModeTab> = registering(creativeModTabs,creativeModTabId){
         CreativeModeTab.builder().title(Component.translatable(creativeModTabId)).icon{
-            ItemRegister.pageOfWisdom.get().defaultInstance
+            ItemRegister.pageOfWisdom.defaultInstance
         }.displayItems{ _, output ->
-            ItemRegister.ITEM_MAP.forEach{ (_, item) ->
+            ItemRegister.registerEntries.forEach{ (_, item) ->
                 output.accept(item.get())
             }
         }.build()
