@@ -6,7 +6,9 @@ import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
 import net.minecraftforge.registries.RegistryObject
 import rufe.laplacians_jargon.Laplacians_Jargon.BuildConfig
+import rufe.laplacians_jargon.consts.idEnchantedPage
 import rufe.laplacians_jargon.consts.idPageOfWisdom
+import rufe.laplacians_jargon.item.ItemEnchantedPage
 import rufe.laplacians_jargon.item.ItemPageOfWisdom
 import java.util.function.Supplier
 
@@ -17,6 +19,9 @@ object ItemRegister {
 
     val pageOfWisdom: RegistryObject<Item> = registering(idPageOfWisdom){
         ItemPageOfWisdom
+    }
+    val enchantedPage: RegistryObject<Item> = registering(idEnchantedPage){
+        ItemEnchantedPage
     }
 
     private fun registering(id: String, supplier: Supplier<Item>): RegistryObject<Item> {
